@@ -4,7 +4,7 @@ This project compiles GameBoy (DMG) and GameBoy Color (CGB) ROMs into portable, 
 
 ---
 
-## 📂 Project Structure
+## Project Structure
 
 *   **`recompiler/`**: The offline transpiler written in **Rust**. It parses the ROM header, decodes LR35902 assembly instructions, constructs basic blocks, and outputs decompiled portable C code.
 *   **`runtime/`**: The C hardware runtime. It emulates:
@@ -17,7 +17,7 @@ This project compiles GameBoy (DMG) and GameBoy Color (CGB) ROMs into portable, 
 
 ---
 
-## 🛠️ Prerequisites & Dependencies
+## Prerequisites & Dependencies
 
 To compile and run this project, make sure you have installed:
 1.  **Rust Toolchain**: For compiling the offline transpiler.
@@ -27,14 +27,14 @@ To compile and run this project, make sure you have installed:
 
 ---
 
-## 🚀 Quick Start (Windows)
+## Quick Start (Windows)
 
 For Windows users, you can compile and play any GameBoy ROM using the drag-and-drop helper:
 
 1. Drag and drop your `.gb` or `.gbc` ROM file directly onto the [drop_rom_here.bat](file:///e:/Repos/Tool_GameBoy_DeRe/drop_rom_here.bat) script in the root directory.
 2. The script will automatically build the Rust transpiler (if missing), transpile the ROM, compile the native executable, and launch the game.
 
-## 🚀 Step-by-Step Usage
+## Step-by-Step Usage
 
 ### 1. Build the Rust Transpiler
 Navigate to the `recompiler/` directory and compile the Rust transpiler:
@@ -81,7 +81,39 @@ build\gb_game.exe --log game_execution.log
 
 ---
 
-## 🎮 Controls
+**Dev Setup / Contributing**
+
+- **Prereqs:** Install Rust (`cargo`), CMake (>=3.15), a C compiler (MSVC/GCC/Clang), `ninja` (or another generator), and Git.
+- **ROMs:** Provide a legally-owned `.gb`/`.gbc` ROM (ROM files are intentionally not committed to the repo).
+
+- **Build the recompiler:**
+```bash
+cd recompiler
+cargo build --release
+cd ..
+```
+
+- **Transpile a ROM (generates `generated/`):**
+```bash
+recompiler/target/release/recompiler.exe "path/to/game.gb" --output-dir generated --mode auto
+```
+
+- **Configure & build the native binary:**
+```bash
+cmake -G "Ninja" -S . -B build
+cmake --build build --config Release
+```
+
+- **Run the game (Windows example):**
+```powershell
+build\gb_game.exe
+```
+
+- **Helper:** Drop a ROM onto [drop_rom_here.bat](drop_rom_here.bat) to run the full pipeline.
+
+- **Reproducibility note:** `generated/` and ROM files are listed in `.gitignore`; other users must supply the ROM and rebuild `recompiler` to reproduce generated sources. If you want generated sources versioned, remove them from `.gitignore` and commit the outputs.
+
+## Controls
 
 *   **Arrow Keys**: D-Pad (Up/Down/Left/Right)
 *   **Z Key**: A Button
@@ -91,9 +123,9 @@ build\gb_game.exe --log game_execution.log
 
 ---
 
-## ⚡ Technical Highlights
+## Technical Highlights
 
 *   **Perfect Audio Synchronization**: The execution speed of the main hardware loop is directly throttled to the SDL2 audio hardware queue size. This guarantees glitch-free, synchronized audio playback with under 30ms of latency, eliminating pitch-drift and crackling.
 *   **Hybrid AOT/Interpreter Execution**: GameBoy ROM code is compiled ahead-of-time (AOT) to native functions. When the code jumps to RAM (like standard OAM DMA routines copied to HRAM), the runtime automatically drops back to the CPU fallback interpreter to run those blocks safely, resuming native execution once code returns to ROM boundaries.
 
-Disclaimer: This is a personal experiment I did with Gemini 3.5 High, if you don't trust AI then don't use this.
+Disclaimer: This is a personal experiment I did with Gemini 3.5 High and other models, if you don't trust AI then don't use this.

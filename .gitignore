@@ -1,0 +1,84 @@
+# Build artifacts and generated content
+build/
+generated/
+recompiler/target/
+
+# Executables and compiled files
+*.exe
+*.dll
+*.so
+*.dylib
+*.lib
+*.a
+*.o
+*.obj
+*.out
+*.class
+*.pyc
+*.pyo
+*.app
+*.msi
+*.apk
+*.jar
+
+# Temporary and backup files
+*.log
+*.tmp
+*.temp
+*.bak
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+
+# IDE and editor settings
+.vscode/
+.idea/
+*.iml
+*.suo
+*.user
+*.userosscache
+*.VC.db
+
+# Sensitive or personal information
+*.key
+*.pem
+*.p12
+*.pfx
+*.crt
+*.csr
+*.der
+*.jks
+*.keystore
+*.env
+.env.*
+*.secret
+*secret*
+*password*
+*passwd*
+*credentials*
+*.kdbx
+*.sqlite
+*.db
+*.sqlite3
+credentials/
+private/
+secrets/
+.ssh/
+ssh/
+id_rsa*
+id_dsa*
+id_ecdsa*
+id_ed25519*
+
+# Any ROM files
+*.gb
+*.gbc
+*.gba
+*.rom
+*.ips
+*.ips.patch
+
+# Runtime and local generated folders
+runtime/

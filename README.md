@@ -128,4 +128,4 @@ build\gb_game.exe
 *   **Perfect Audio Synchronization**: The execution speed of the main hardware loop is directly throttled to the SDL2 audio hardware queue size. This guarantees glitch-free, synchronized audio playback with under 30ms of latency, eliminating pitch-drift and crackling.
 *   **Hybrid AOT/Interpreter Execution**: GameBoy ROM code is compiled ahead-of-time (AOT) to native functions. When the code jumps to RAM (like standard OAM DMA routines copied to HRAM), the runtime automatically drops back to the CPU fallback interpreter to run those blocks safely, resuming native execution once code returns to ROM boundaries.
 
-Disclaimer: This is a personal experiment I did with Gemini 3.5 High and other models, if you don't trust AI then don't use this.
+AI use disclaimer: This is a personal experiment I did with Gemini 3.5 High and other models.
